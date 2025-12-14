@@ -1,38 +1,43 @@
-"use client"
+"use client";
 
-import React, { useEffect, useRef } from "react"
-import { cn } from "@/lib/utils"
-import { Mail, Phone } from "lucide-react"
+import React, { useEffect, useRef } from "react";
+import { cn } from "@/lib/utils";
+import { Mail, Phone } from "lucide-react";
 
 interface MarqueeProps {
-  className?: string
-  children?: React.ReactNode
-  speed?: number
-  pauseOnHover?: boolean
+  className?: string;
+  children?: React.ReactNode;
+  speed?: number;
+  pauseOnHover?: boolean;
 }
 
-export function Marquee({ className, children, speed = 50, pauseOnHover = true }: MarqueeProps) {
-  const marqueeRef = useRef<HTMLDivElement>(null)
-  const contentRef = useRef<HTMLDivElement>(null)
-  const [contentWidth, setContentWidth] = React.useState(0)
-  const [isPaused, setIsPaused] = React.useState(false)
+export function Marquee({
+  className,
+  children,
+  speed = 50,
+  pauseOnHover = true,
+}: MarqueeProps) {
+  const marqueeRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const [contentWidth, setContentWidth] = React.useState(0);
+  const [isPaused, setIsPaused] = React.useState(false);
 
   useEffect(() => {
     if (contentRef.current) {
-      setContentWidth(contentRef.current.offsetWidth)
+      setContentWidth(contentRef.current.offsetWidth);
     }
 
     const handleResize = () => {
       if (contentRef.current) {
-        setContentWidth(contentRef.current.offsetWidth)
+        setContentWidth(contentRef.current.offsetWidth);
       }
-    }
+    };
 
-    window.addEventListener("resize", handleResize)
-    return () => window.removeEventListener("resize", handleResize)
-  }, [children])
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [children]);
 
-  const duration = contentWidth / speed
+  const duration = contentWidth / speed;
 
   return (
     <div
@@ -67,7 +72,7 @@ export function Marquee({ className, children, speed = 50, pauseOnHover = true }
         }
       `}</style>
     </div>
-  )
+  );
 }
 
 export function ContactMarquee() {
@@ -106,5 +111,5 @@ export function ContactMarquee() {
         </div>
       </Marquee>
     </div>
-  )
+  );
 }
